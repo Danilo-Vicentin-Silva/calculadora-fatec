@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: auto;
+
+        background-color: #000;
+        color: white;
+      }
+
+      h1 {
+        font-size: 3em;
+      }
+
+      p {
+        font-size: 1.5em;
+        margin-top: 10px;
+      }
+
+      form {
+        font-size: 2em;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        border: 1px solid #000;
+        border-radius: 9px;
+        padding: 50px;
+      }
+
+      form input {
+        padding: 10px;
+        font-size: 0.4em;
+        background-color: rgba(128, 128, 128, 0.523);
+        border-radius: 10px;
+        color: white;
+      }
+
+      #num1,
+      #num2,
+      #oper {
+        display: block;
+      }
+
+      #result-div {
+        position: absolute;
+        width: 100vw;
+        top: 70%;
+
+        text-align: center;
+        margin: auto;
+      }
+
+      ul {
+        width: 100%;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 30px 0;
+      }
+
+      ul button {
+        color: white;
+        font-size: 1em;
+        width: 50px;
+        height: 50px;
+      }
+
+      ul button:hover {
+        background-color: #000;
+        color: #fff;
+      }
+
+      input[type="reset"],
+      input[type="submit"] {
+        width: 100%;
+        color: white;
+      }
+
+      footer {
+        font-size: 0.8em;
+        display: block;
+        margin-top: 10px;
+
+        text-align: center;
+
+        font-style: italic;
+        font-weight: bold;
+
+        color: rgba(255, 255, 255, 0.508);
+        position: absolute;
+        bottom:0%;
+        width: 100%;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Calculadora Fatec</h1>
+      <p>Digite os números e a operação</p>
+      <p><small>Válidas somente os seguintes: +, -, *, /</small></p>
+    </header>
+
+    <main>
+      <form action="" method="get">
+        <div id="num1">
+          <label for="num1">Número 1:</label>
+          <input
+            type="number"
+            step="any"
+            max="99999999999999999"
+            autofocus
+            name="num1"
+            required
+          />
+        </div>
+        <div>
+          <label for="oper">Operação:</label>
+          <input type="text" name="oper" required />
+        </div>
+        <div id="num2">
+          <label for="num2">Número 2:</label>
+          <input
+            type="number"
+            step="any"
+            max="99999999999999999"
+            name="num2"
+            required
+          />
+        </div>
+        <input type="submit" value="Calcular" />
+        <input type="reset" value="Limpar" onclick="location.reload()" />
+      </form>
+      <div id="result-div">
+        <p id="result"></p>
+      </div>
+    </main>
+
+     <footer><p><small><icon>&#169</icon> Danilo&Andrey&Henrique&Sena&Giovanne 2024</small></p></footer>
+
+    <script>
+      const form = document.querySelector("form");
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const num1 = form.num1.value;
+        const oper = form.oper.value;
+        const num2 = form.num2.value;
+
+        if (oper != "+" && oper != "-" && oper != "*" && oper != "/") {
+          alert("Operação inválida");
+          return;
+        }
+
+        const result = eval(`${num1} ${oper} ${num2}`);
+        const text = result.toString();
+        document.querySelector(
+          "#result"
+        ).textContent = `${num1} ${oper} ${num2} = ${text}`;
+      });
+
+      function toggleTheme() {
+        if (document.body.classList.contains("white")) {
+          document.body.classList.remove("white");
+          document.body.classList.add("black");
+        } else {
+          document.body.classList.remove("black");
+        }
+        document.body.classList.toggle("white");
+        
+      }
+    </script>
+  </body>
+</html>
